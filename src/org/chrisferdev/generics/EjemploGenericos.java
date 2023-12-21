@@ -1,6 +1,7 @@
 package org.chrisferdev.generics;
 
 import org.chrisferdev.poointerfaces.modelo.Cliente;
+import org.chrisferdev.poointerfaces.modelo.ClientePremium;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +29,19 @@ public class EjemploGenericos {
                 "Luci", "Bea", "John"}, enterosArreglo);
         nombres.forEach(System.out::println);
 
+        List<ClientePremium> clientePremiumList = fromArrayToList(
+                new ClientePremium[]{new ClientePremium("Paco", "Fernandez")});
+
+    }
+    public static <T> List<T> fromArrayToList(T[] c){
+        return Arrays.asList(c);
     }
 
-    public static <T> List<T> fromArrayToList(T[] c){
+    public static <T extends Number> List<T> fromArrayToList(T[] c){
+        return Arrays.asList(c);
+    }
+
+    public static <T extends Cliente & Comparable> List<T> fromArrayToList(T[] c){
         return Arrays.asList(c);
     }
 
