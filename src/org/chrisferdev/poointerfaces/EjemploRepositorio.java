@@ -1,6 +1,9 @@
-package org.chrisferdev.poointerfaces.repositorio;
+package org.chrisferdev.poointerfaces;
 
 import org.chrisferdev.poointerfaces.modelo.Cliente;
+import org.chrisferdev.poointerfaces.repositorio.Direccion;
+import org.chrisferdev.poointerfaces.repositorio.OrdenablePaginableCrudRepositorio;
+import org.chrisferdev.poointerfaces.repositorio.lista.ClienteListRepositorio;
 
 import java.util.List;
 

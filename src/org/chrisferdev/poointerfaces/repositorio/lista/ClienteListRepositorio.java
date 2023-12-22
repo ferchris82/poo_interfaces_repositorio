@@ -1,6 +1,8 @@
-package org.chrisferdev.poointerfaces.repositorio;
+package org.chrisferdev.poointerfaces.repositorio.lista;
 
 import org.chrisferdev.poointerfaces.modelo.Cliente;
+import org.chrisferdev.poointerfaces.repositorio.AbstractaListRepositorio;
+import org.chrisferdev.poointerfaces.repositorio.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +37,8 @@ public class ClienteListRepositorio extends AbstractaListRepositorio<Cliente> {
             case "id" -> resultado = a.getId().compareTo(b.getId());
             case "nombre" -> resultado = a.getNombre().compareTo(b.getNombre());
             case "apellido" -> resultado = a.getApellido().compareTo(b.getApellido());
+
         }
         return resultado;
     }
-
 }
