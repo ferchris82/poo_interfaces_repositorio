@@ -4,13 +4,14 @@ import org.chrisferdev.poointerfaces.modelo.Cliente;
 import org.chrisferdev.poointerfaces.modelo.Producto;
 import org.chrisferdev.poointerfaces.repositorio.AbstractaListRepositorio;
 import org.chrisferdev.poointerfaces.repositorio.Direccion;
+import org.chrisferdev.poointerfaces.repositorio.exepciones.LecturaAccesoDatoException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoListRepositorio extends AbstractaListRepositorio<Producto> {
     @Override
-    public void editar(Producto producto) {
+    public void editar(Producto producto) throws LecturaAccesoDatoException {
         Producto p = porId(producto.getId());
         p.setDescripcion(producto.getDescripcion());
         p.setPrecio(producto.getPrecio());
