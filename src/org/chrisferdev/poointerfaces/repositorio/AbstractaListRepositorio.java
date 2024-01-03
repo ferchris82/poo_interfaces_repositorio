@@ -1,8 +1,7 @@
 package org.chrisferdev.poointerfaces.repositorio;
 
 import org.chrisferdev.poointerfaces.modelo.BaseEntity;
-import org.chrisferdev.poointerfaces.repositorio.exepciones.EscrituraAccesoDatoException;
-import org.chrisferdev.poointerfaces.repositorio.exepciones.LecturaAccesoDatoException;
+import org.chrisferdev.poointerfaces.repositorio.exepciones.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
     @Override
     public T porId(Integer id) throws LecturaAccesoDatoException {
         if(id == null || id <= 0){
-            throw new LecturaAccesoDatoException("Id inválido debe ser < 0");
+            throw new LecturaAccesoDatoException("Id inválido debe ser > 0");
         }
         T resultado = null;
         for (T cli : dataSource) {
@@ -42,6 +41,10 @@ public abstract class AbstractaListRepositorio<T extends BaseEntity> implements 
     public void crear(T t) throws EscrituraAccesoDatoException{
         if(t == null){
             throw new EscrituraAccesoDatoException("Error al insertar un objeto null");
+        }
+        if(this.dataSource.contains(t)){
+            throw new RegistroDuplicadoAccesoDatoException("Error el objeto con id "
+                    + t.getId() + " existe en el repositorio");
         }
         this.dataSource.add(t);
     }

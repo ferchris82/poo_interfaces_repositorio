@@ -6,6 +6,7 @@ import org.chrisferdev.poointerfaces.repositorio.OrdenablePaginableCrudRepositor
 import org.chrisferdev.poointerfaces.repositorio.exepciones.AccesoDatoException;
 import org.chrisferdev.poointerfaces.repositorio.exepciones.EscrituraAccesoDatoException;
 import org.chrisferdev.poointerfaces.repositorio.exepciones.LecturaAccesoDatoException;
+import org.chrisferdev.poointerfaces.repositorio.exepciones.RegistroDuplicadoAccesoDatoException;
 import org.chrisferdev.poointerfaces.repositorio.lista.ClienteListRepositorio;
 
 import java.util.List;
@@ -18,9 +19,11 @@ public class EjemploRepositorio {
             repo.crear(new Cliente("Jano", "Perez"));
             repo.crear(new Cliente("Bea", "González"));
             repo.crear(new Cliente("Luci", "Martínez"));
-            repo.crear(new Cliente("Andrés", "Guzmán"));
+            Cliente andres = new Cliente("Andrés", "Guzmán");
+            repo.crear(andres);
+            repo.crear(andres);
 
-            repo.crear(null);
+            //repo.crear(null);
 
             List<Cliente> clientes = repo.listar();
             clientes.forEach(System.out::println);
@@ -38,7 +41,7 @@ public class EjemploRepositorio {
             Cliente beaActualizar = new Cliente("Bea", "Mena");
             beaActualizar.setId(2);
             repo.editar(beaActualizar);
-            Cliente bea = repo.porId(10);
+            Cliente bea = repo.porId(4);
             System.out.println(bea);
             System.out.println("===========");
             repo.listar("nombre", Direccion.ASC).forEach(System.out::println);
@@ -47,7 +50,11 @@ public class EjemploRepositorio {
             repo.listar().forEach(System.out::println);
             System.out.println("===== total ======");
             System.out.println("Total registros: " + repo.total());
-        } catch (LecturaAccesoDatoException e){
+        } catch(RegistroDuplicadoAccesoDatoException e){
+            System.out.println("Registro Duplicado: " + e.getMessage());
+            e.printStackTrace();
+        }
+        catch (LecturaAccesoDatoException e){
             System.out.println("Lectura: " + e.getMessage());
             e.printStackTrace();
         } catch(EscrituraAccesoDatoException e){
